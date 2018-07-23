@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Item from "./Item";
-import { Container, Row, Col } from "reactstrap";
 
 class ListOfItems extends Component {
   constructor() {
@@ -126,29 +125,29 @@ class ListOfItems extends Component {
     );
 
     return (
-      <Container>
-        <Row>
-          <Col md={{ size: 6, offset: 3 }} className="text-center">
-            <h1 className="todo-header">Todo list</h1>
-            <form onSubmit={this.onSubmit}>
-              <input
-                type="text"
-                name="itemText"
-                ref={input => {
-                  this.itemText = input;
-                }}
-                onChange={this.onChange}
-                value={this.state.itemText}
-                onKeyPress={this.onKeyPress}
-                autoComplete="off"
-              />
-              <input type="submit" value="Submit" />
-            </form>
-            {this.state.error && <p>{this.state.error}</p>}
-            {listOfItems}
-          </Col>
-        </Row>
-      </Container>
+      <div className="list">
+        <header className="list-header">
+          <span className="list-header__buckle">{`{`}</span> React todo list{" "}
+          <span className="list-header__buckle">{`}`}</span>
+        </header>
+        <form onSubmit={this.onSubmit}>
+          <input
+            className="list__input-text"
+            type="text"
+            name="itemText"
+            ref={input => {
+              this.itemText = input;
+            }}
+            onChange={this.onChange}
+            value={this.state.itemText}
+            onKeyPress={this.onKeyPress}
+            autoComplete="off"
+          />
+          <input className="list__button" type="submit" value="Submit" />
+        </form>
+        {this.state.error && <p className="list__error">{this.state.error}</p>}
+        <div className="item-container">{listOfItems}</div>
+      </div>
     );
   }
 }
