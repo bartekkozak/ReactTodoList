@@ -54,7 +54,7 @@ class ListOfItems extends Component {
 
   addItem() {
     if (this.state.itemText.trim() === "") {
-      this.setState({ error: "Musisz najpierw wpisac tekst", itemText: "" });
+      this.setState({ error: "You must enter the text", itemText: "" });
       this.itemText.focus();
     } else {
       this.addDate();
@@ -89,7 +89,7 @@ class ListOfItems extends Component {
   }
 
   onKeyPress(e) {
-    if (e.key === "Enter") {
+    if (this.state.itemText.trim() === "" && e.key === "Enter") {
       this.addItem();
     }
   }
@@ -131,19 +131,25 @@ class ListOfItems extends Component {
           <span className="list-header__buckle">{`}`}</span>
         </header>
         <form onSubmit={this.onSubmit}>
-          <input
-            className="list__input-text"
-            type="text"
-            name="itemText"
-            ref={input => {
-              this.itemText = input;
-            }}
-            onChange={this.onChange}
-            value={this.state.itemText}
-            onKeyPress={this.onKeyPress}
-            autoComplete="off"
-          />
-          <input className="list__button" type="submit" value="Submit" />
+          <div className="list__input-wrapper">
+            <input
+              className="list__input-text effect"
+              type="text"
+              name="itemText"
+              ref={input => {
+                this.itemText = input;
+              }}
+              onChange={this.onChange}
+              value={this.state.itemText}
+              onKeyPress={this.onKeyPress}
+              autoComplete="off"
+              placeholder="Write a note..."
+            />
+            <span class="focus-border">
+              <i />
+            </span>
+          </div>
+          <input className="list__button" type="submit" value="Add note" />
         </form>
         {this.state.error && <p className="list__error">{this.state.error}</p>}
         <div className="item-container">{listOfItems}</div>
